@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter, Route}from 'react-router-dom'
+import Home from './component/home/home'
+import Part1 from './component/part1/part1'
+
+const routes = [
+  {path: "/", component: Home},
+  {path: "/part1", component: Part1},
+];
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    return (<BrowserRouter>
+        <div>
+          {
+            routes.map((page, index) => page.component ?
+              <Route key={index} exact path={page.path} component={page.component}/> : "")
+          }
+        </div>
+      </BrowserRouter>
+
     );
   }
 }
